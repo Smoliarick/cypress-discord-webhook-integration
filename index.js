@@ -12,25 +12,25 @@ const data = new FormData();
  * @param {*} username - username for Bot in Discord
  * @param {*} avatarUrl - URL for image for Bot's avatar in Discord
  */
-const sendToDiscordWebhook = (webhookUrl,
+async function sendToDiscordWebhook(webhookUrl,
     files,
     content = undefined,
     username = undefined,
     avatarUrl = undefined,
-) => {
+) {
   files.forEach((file, index) => {
     data.append(`files[${index}]`, fs.createReadStream(file));
   });
 
+  const nowDate = new Date();
   const userContent = content ? content :
-    'This message contains reports for Cypress Autotest';
+    `Report from Cypress:\nDate: ${nowDate.toLocaleString()}`;
   const userUsername = username ? username : 'Cypress Autotest Report';
   const userAvatarUrl = avatarUrl ? avatarUrl : 'https://avatars.githubusercontent.com/u/8908513?s=200&v=4';
 
   data.append('content', userContent);
   data.append('username', userUsername);
   data.append('avatar_url', userAvatarUrl);
-
 
   const config = {
     method: 'post',
@@ -41,9 +41,7 @@ const sendToDiscordWebhook = (webhookUrl,
     data: data,
   };
 
-  axios(config).then((response) => {
-    console.log(JSON.stringify(response.data));
-  }).catch((error) => {
+  await axios(config).catch((error) => {
     console.log(error);
   });
 };
