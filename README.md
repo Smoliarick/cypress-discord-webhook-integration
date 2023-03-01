@@ -12,6 +12,7 @@ This package helps to send reports for Cypress Autotests to Discord channel.
 - [Prepare your Discord Server for using package](#prepare-your-discord-server-for-using-package)
 - [Add package into `cypress.config.js` file:](#add-package-into-cypressconfigjs-file)
 - [Running code](#running-code)
+- [Example](#example)
 
 
 # Installation
@@ -125,3 +126,6 @@ Video example:
 https://user-images.githubusercontent.com/104084410/222214637-f130fda1-fcf3-4dab-83f7-a53a087fbbf5.mp4
 
 
+# Example
+
+You can use this example: https://github.com/Smoliarick/cypress-discord-webhook-integration-example. This project was set up using cypress-discord-webhook-integration package.
