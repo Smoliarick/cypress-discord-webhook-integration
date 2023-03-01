@@ -46,15 +46,15 @@ async function sendToDiscordWebhook(webhookUrl,
 
 ![Server Settings button](https://github.com/Smoliarick/cypress-discord-webhook-integration/blob/2fcb18418158926cf01c738a5b82a12a5bc1edbb/img/Screenshot_1.png?raw=true)
 
-1. Open Integrations tab and click on the Create Webhook button
+2. Open Integrations tab and click on the Create Webhook button
 
 ![Integrations tab](https://github.com/Smoliarick/cypress-discord-webhook-integration/blob/2fcb18418158926cf01c738a5b82a12a5bc1edbb/img/Screenshot_2.png?raw=true)
 
-1. Click on your Webhook > Webhook is expanded
+3. Click on your Webhook > Webhook is expanded
 
 ![Webhook](https://github.com/Smoliarick/cypress-discord-webhook-integration/blob/2fcb18418158926cf01c738a5b82a12a5bc1edbb/img/Screenshot_3.png?raw=true)
 
-1. Setup your Webhook and click on the Copy Webhook URL button (this URL will be used for `.env` file)
+4. Setup your Webhook and click on the Copy Webhook URL button (this URL will be used for `.env` file)
 
 ![Webhook URL is copied](https://github.com/Smoliarick/cypress-discord-webhook-integration/blob/2fcb18418158926cf01c738a5b82a12a5bc1edbb/img/Screenshot_4.png?raw=true)
 
@@ -118,7 +118,7 @@ module.exports = defineConfig({
 
 ![Result](https://github.com/Smoliarick/cypress-discord-webhook-integration/blob/2fcb18418158926cf01c738a5b82a12a5bc1edbb/img/Screenshot_5.png?raw=true)
 
-1. You can upload report from Discord channel when you want.
+3. You can upload report from Discord channel when you want.
 
 Video example:
 
