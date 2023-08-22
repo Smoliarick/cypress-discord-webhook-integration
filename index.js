@@ -2,6 +2,30 @@ const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
 const data = new FormData();
+const nodeHtmlToImage = require('node-html-to-image');
+
+/**
+ *
+ * @param {*} files - HTML files
+ */
+async function formatFiles(files) {
+  const formattedFiles = [];
+  for (let i = 0; i < files.length; i++) {
+    const content = fs.readFileSync(
+        files[i],
+        'utf-8',
+    );
+    const newPath = `${files[i].substring(0, files[i].length - 4)}png`;
+    formattedFiles.push(newPath);
+
+    await nodeHtmlToImage({
+      output: newPath,
+      html: content,
+    })
+        .then(() => console.log('The image was created successfully!'));
+  }
+  return formattedFiles;
+}
 
 /**
  *
@@ -11,16 +35,25 @@ const data = new FormData();
  * @param {*} content - text for message in Discord
  * @param {*} username - username for Bot in Discord
  * @param {*} avatarUrl - URL for image for Bot's avatar in Discord
+ * @param {*} convertHtmlToPng - bool flag for converting html files to png
  */
 async function sendToDiscordWebhook(webhookUrl,
     files,
     content = undefined,
     username = undefined,
     avatarUrl = undefined,
+    convertHtmlToPng = false,
 ) {
-  files.forEach((file, index) => {
-    data.append(`files[${index}]`, fs.createReadStream(file));
-  });
+  if (convertHtmlToPng) {
+    const formattedFiles = await formatFiles(files);
+    formattedFiles.forEach((file, index) => {
+      data.append(`files[${index}]`, fs.createReadStream(file));
+    });
+  } else {
+    files.forEach((file, index) => {
+      data.append(`files[${index}]`, fs.createReadStream(file));
+    });
+  }
 
   const nowDate = new Date();
   const userContent = content ? content :

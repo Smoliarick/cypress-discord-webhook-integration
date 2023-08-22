@@ -13,6 +13,8 @@ This package helps to send reports for Cypress Autotests to Discord channel.
 - [Add package into `cypress.config.js` file:](#add-package-into-cypressconfigjs-file)
 - [Running code](#running-code)
 - [Example](#example)
+- [Notes](#notes)
+  - [Version `1.1.0`](#version-110)
 
 
 # Installation
@@ -100,6 +102,7 @@ module.exports = defineConfig({
           // customMessage,  // uncomment it if you use custom value
           // customUsername, // uncomment it if you use custom value
           // customAvatar,   // uncomment it if you use custom value
+          convertHtmlToPng = true,           // if you want to convert HTML files to PNG
         );
         // --------------------required part------------------------------
       });
@@ -129,3 +132,21 @@ https://user-images.githubusercontent.com/104084410/222214637-f130fda1-fcf3-4dab
 # Example
 
 You can use this example: https://github.com/Smoliarick/cypress-discord-webhook-integration-example. This project was set up using cypress-discord-webhook-integration package.
+
+# Notes
+## Version `1.1.0`
+
+I've added new functionality which helps to convert HTML reports to PNG file for Discord.
+
+```js
+await sendToDiscordWebhook(
+  webhookURL,     // required variable
+  files,          // required variable
+  // customMessage,  // uncomment it if you use custom value
+  // customUsername, // uncomment it if you use custom value
+  // customAvatar,   // uncomment it if you use custom value
+  convertHtmlToPng = true,           // if you want to convert HTML files to PNG
+);
+```
+
+Just set `true` value to `convertHtmlToPng` variable. Your paths to files should contain `.html` at the end of the file path. It convert HTML file to PNG file and put PNG file into you directory, after it these PNG files will be send to Discord.
