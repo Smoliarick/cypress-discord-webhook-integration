@@ -1,7 +1,6 @@
 const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
-const data = new FormData();
 const nodeHtmlToImage = require('node-html-to-image');
 
 /**
@@ -44,6 +43,8 @@ async function sendToDiscordWebhook(webhookUrl,
     avatarUrl = undefined,
     convertHtmlToPng = false,
 ) {
+  const data = new FormData();
+
   if (convertHtmlToPng) {
     const formattedFiles = await formatFiles(files);
     formattedFiles.forEach((file, index) => {
