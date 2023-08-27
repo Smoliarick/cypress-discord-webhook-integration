@@ -1,6 +1,6 @@
 {
   "name": "cypress-discord-webhook-integration",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Discord Webhook integration for Cypress autotests",
   "main": "index.js",
   "repository": {

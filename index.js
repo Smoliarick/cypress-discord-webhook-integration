@@ -117,7 +117,7 @@ async function sendToDiscordWebhookForEachSpec(webhookUrl,
   for (let i = 0; i < afterSpecFiles.length; i += 10) {
     const data = new FormData();
 
-    const sliceArray = afterSpecFiles.slice(i, i + 9);
+    const sliceArray = afterSpecFiles.slice(i, i + 10);
 
     sliceArray.forEach((file, index) => {
       data.append(`files[${index}]`, fs.createReadStream(file));
