@@ -1,6 +1,6 @@
 {
   "name": "cypress-discord-webhook-integration",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Discord Webhook integration for Cypress autotests",
   "main": "index.js",
   "repository": {
@@ -21,7 +21,8 @@
     "axios": ">=1.7.4",
     "form-data": "^4.0.0",
     "fs": "^0.0.1-security",
-    "node-html-to-image": "^4.0.0"
+    "node-html-to-image": "^4.0.0",
+    "ws": ">=8.18.0"
   },
   "devDependencies": {
     "eslint": "^8.35.0",
