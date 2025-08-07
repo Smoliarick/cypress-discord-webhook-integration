@@ -1,6 +1,6 @@
 <h1>cypress-discord-webhook-integration</h1>
 
-<a href="https://www.npmjs.com/package/cypress-discord-webhook-integration"><img src="https://static.npmjs.com/b0f1a8318363185cc2ea6a40ac23eeb2.png"></a> <a href="https://github.com/Smoliarick/cypress-discord-webhook-integration"><img src="https://github.githubassets.com/favicons/favicon.png" style="background: white"></a>
+<a href="https://github.com/Smoliarick/cypress-discord-webhook-integration"><img src="https://github.githubassets.com/favicons/favicon.png" style="background: white"></a>
 
 This package helps to send reports for Cypress Autotests to Discord channel.
 
@@ -17,7 +17,6 @@ This package helps to send reports for Cypress Autotests to Discord channel.
 - [Notes](#notes)
   - [Version `1.1.0`](#version-110)
   - [Version `1.2.0`](#version-120)
-
 
 # Installation
 
@@ -63,46 +62,48 @@ WEBHOOK_URL=https://discord.com/api/webhooks/id/token
 3. Add this package to `cypress.config.js` file. Example:
 
 ```js
-const { defineConfig } = require('cypress');
+const { defineConfig } = require("cypress");
 
-require('dotenv').config();
+require("dotenv").config();
 
 module.exports = defineConfig({
   e2e: {
     // other settings
     setupNodeEvents(on, config) {
-      on('after:run', async (results) => {
+      on("after:run", async (results) => {
         // on this step report should be generated
         // --------------------required part------------------------------
-        const { sendToDiscordWebhook } = require('cypress-discord-webhook-integration'); // import lib
+        const {
+          sendToDiscordWebhook,
+        } = require("cypress-discord-webhook-integration"); // import lib
         const webhookURL = process.env.WEBHOOK_URL; // REQUIRED: Webhook URL for Discord
-        const files = ['./cypress/reports/html/index.html']; // REQUIRED: File paths
+        const files = ["./cypress/reports/html/index.html"]; // REQUIRED: File paths
         // --------------------required part------------------------------
 
         // --------------------custom data------------------------------
-        const customUsername = 'Custom Username for Bot'; // Custom name for Bot's username in Discord
-        const customMessage = 'Custom message for Bot'; // Custom message for Bot's message in Discord
-        const customAvatar = 'https://cdn.sanity.io/images/o0o2tn5x/production/13b9c8412093e2f0cdb5495e1f59144967fa1664-512x512.jpg'; // Custom avatar URL for Bot in Discord
+        const customUsername = "Custom Username for Bot"; // Custom name for Bot's username in Discord
+        const customMessage = "Custom message for Bot"; // Custom message for Bot's message in Discord
+        const customAvatar =
+          "https://cdn.sanity.io/images/o0o2tn5x/production/13b9c8412093e2f0cdb5495e1f59144967fa1664-512x512.jpg"; // Custom avatar URL for Bot in Discord
         // --------------------custom data------------------------------
 
         // --------------------required part------------------------------
         // Using function
         await sendToDiscordWebhook(
-          webhookURL,     // required variable
-          files,          // required variable
-          customMessage,  // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
+          webhookURL, // required variable
+          files, // required variable
+          customMessage, // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
           customUsername, // set to undefined if you don't use custom username, but use custom avatar or convertHtmlToPng functionality
-          customAvatar,   // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
-          true,           // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
+          customAvatar, // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
+          true // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
         );
         // --------------------required part------------------------------
       });
       return config;
     },
-    specPattern: 'cypress/e2e/**/*.spec.{js, jsx, ts, tsx}',
+    specPattern: "cypress/e2e/**/*.spec.{js, jsx, ts, tsx}",
   },
 });
-
 ```
 
 # Running code
@@ -116,27 +117,26 @@ module.exports = defineConfig({
 
 Video example:
 
-
 https://user-images.githubusercontent.com/104084410/222214637-f130fda1-fcf3-4dab-83f7-a53a087fbbf5.mp4
-
 
 # Example
 
 You can use this example: https://github.com/Smoliarick/cypress-discord-webhook-integration-example. This project was set up using cypress-discord-webhook-integration package.
 
 # Notes
+
 ## Version `1.1.0`
 
 I've added new functionality which helps to convert HTML reports to PNG file for Discord.
 
 ```js
 await sendToDiscordWebhook(
-  webhookURL,     // required variable
-  files,          // required variable
-  customMessage,  // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
+  webhookURL, // required variable
+  files, // required variable
+  customMessage, // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
   customUsername, // set to undefined if you don't use custom username, but use custom avatar or convertHtmlToPng functionality
-  customAvatar,   // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
-  true,           // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
+  customAvatar, // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
+  true // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
 );
 ```
 
@@ -144,12 +144,12 @@ Example (when you use only convertHtmlToPng functionality, but don't want to use
 
 ```js
 await sendToDiscordWebhook(
-  webhookURL,     // required variable
-  files,          // required variable
-  undefined,      // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
-  undefined,      // set to undefined if you don't use custom username, but use custom avatar or convertHtmlToPng functionality
-  undefined,      // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
-  true,           // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
+  webhookURL, // required variable
+  files, // required variable
+  undefined, // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
+  undefined, // set to undefined if you don't use custom username, but use custom avatar or convertHtmlToPng functionality
+  undefined, // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
+  true // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
 );
 ```
 
@@ -162,30 +162,33 @@ From this version you can use several ways to send messages with PNG files:
 <h2>Send 1 message with 1 PNG file which contains results</h2>
 
 ```js
-on('after:run', async (results) => {
+on("after:run", async (results) => {
   await afterRunHook();
 
   // --------------------required part------------------------------
-  const { sendToDiscordWebhook } = require('cypress-discord-webhook-integration'); // import lib
+  const {
+    sendToDiscordWebhook,
+  } = require("cypress-discord-webhook-integration"); // import lib
   const webhookURL = process.env.WEBHOOK_URL; // REQUIRED: Webhook URL for Discord
-  const files = ['./cypress/reports/html/index.html']; // REQUIRED: File paths
+  const files = ["./cypress/reports/html/index.html"]; // REQUIRED: File paths
   // --------------------required part------------------------------
 
   // --------------------custom data------------------------------
-  const customUsername = 'Custom Username for Bot'; // Custom name for Bot's username in Discord
-  const customMessage = 'Custom message for Bot'; // Custom message for Bot's message in Discord
-  const customAvatar = 'https://cdn.sanity.io/images/o0o2tn5x/production/13b9c8412093e2f0cdb5495e1f59144967fa1664-512x512.jpg'; // Custom avatar URL for Bot in Discord
+  const customUsername = "Custom Username for Bot"; // Custom name for Bot's username in Discord
+  const customMessage = "Custom message for Bot"; // Custom message for Bot's message in Discord
+  const customAvatar =
+    "https://cdn.sanity.io/images/o0o2tn5x/production/13b9c8412093e2f0cdb5495e1f59144967fa1664-512x512.jpg"; // Custom avatar URL for Bot in Discord
   // --------------------custom data------------------------------
 
   // --------------------required part------------------------------
   // Using function
   await sendToDiscordWebhook(
-    webhookURL,     // required variable
-    files,          // required variable
-    customMessage,  // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
+    webhookURL, // required variable
+    files, // required variable
+    customMessage, // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
     customUsername, // set to undefined if you don't use custom username, but use custom avatar or convertHtmlToPng functionality
-    customAvatar,   // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
-    true,           // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
+    customAvatar, // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
+    true // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
   );
   // --------------------required part------------------------------
 });
@@ -194,30 +197,33 @@ on('after:run', async (results) => {
 <h2>Send 1 message for each spec file with 1 PNG file</h2>
 
 ```js
-on('after:spec', async (results) => {
+on("after:spec", async (results) => {
   await afterRunHook();
 
   // --------------------required part------------------------------
-  const { sendToDiscordWebhook } = require('cypress-discord-webhook-integration'); // import lib
+  const {
+    sendToDiscordWebhook,
+  } = require("cypress-discord-webhook-integration"); // import lib
   const webhookURL = process.env.WEBHOOK_URL; // REQUIRED: Webhook URL for Discord
-  const files = ['./cypress/reports/html/index.html']; // REQUIRED: File paths
+  const files = ["./cypress/reports/html/index.html"]; // REQUIRED: File paths
   // --------------------required part------------------------------
 
   // --------------------custom data------------------------------
-  const customUsername = 'Custom Username for Bot'; // Custom name for Bot's username in Discord
-  const customMessage = 'Custom message for Bot'; // Custom message for Bot's message in Discord
-  const customAvatar = 'https://cdn.sanity.io/images/o0o2tn5x/production/13b9c8412093e2f0cdb5495e1f59144967fa1664-512x512.jpg'; // Custom avatar URL for Bot in Discord
+  const customUsername = "Custom Username for Bot"; // Custom name for Bot's username in Discord
+  const customMessage = "Custom message for Bot"; // Custom message for Bot's message in Discord
+  const customAvatar =
+    "https://cdn.sanity.io/images/o0o2tn5x/production/13b9c8412093e2f0cdb5495e1f59144967fa1664-512x512.jpg"; // Custom avatar URL for Bot in Discord
   // --------------------custom data------------------------------
 
   // --------------------required part------------------------------
   // Using function
   await sendToDiscordWebhook(
-    webhookURL,     // required variable
-    files,          // required variable
-    customMessage,  // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
+    webhookURL, // required variable
+    files, // required variable
+    customMessage, // set to undefined if you don't use custom message, but use custom avatar, custom username or convertHtmlToPng functionality
     customUsername, // set to undefined if you don't use custom username, but use custom avatar or convertHtmlToPng functionality
-    customAvatar,   // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
-    true,           // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
+    customAvatar, // set to undefined if you don't use custom message, but use convertHtmlToPng functionality
+    true // if you want to convert HTML files to PNG set it as true, or remove it if you don't want to use this functionality
   );
   // --------------------required part------------------------------
 });
@@ -227,33 +233,37 @@ on('after:spec', async (results) => {
 
 ```js
 // Add the next line at the beginning of the file
-const { sendToDiscordWebhookForEachSpec, afterSpecFunction } = require('cypress-discord-webhook-integration'); // import lib
+const {
+  sendToDiscordWebhookForEachSpec,
+  afterSpecFunction,
+} = require("cypress-discord-webhook-integration"); // import lib
 
 // Add the next lines into the setupNodeEvents function
-on('after:spec', async (results) => {
+on("after:spec", async (results) => {
   await afterRunHook();
 
-  await afterSpecFunction('./cypress/reports/html/index.html');
+  await afterSpecFunction("./cypress/reports/html/index.html");
 });
 
-on('after:run', async (results) => {
+on("after:run", async (results) => {
   // --------------------required part------------------------------
   const webhookURL = process.env.WEBHOOK_URL; // REQUIRED: Webhook URL for Discord
   // --------------------required part------------------------------
 
   // --------------------custom data------------------------------
-  const customUsername = 'Custom Username for Bot'; // Custom name for Bot's username in Discord
-  const customMessage = 'Custom message for Bot'; // Custom message for Bot's message in Discord
-  const customAvatar = 'https://cdn.sanity.io/images/o0o2tn5x/production/13b9c8412093e2f0cdb5495e1f59144967fa1664-512x512.jpg'; // Custom avatar URL for Bot in Discord
+  const customUsername = "Custom Username for Bot"; // Custom name for Bot's username in Discord
+  const customMessage = "Custom message for Bot"; // Custom message for Bot's message in Discord
+  const customAvatar =
+    "https://cdn.sanity.io/images/o0o2tn5x/production/13b9c8412093e2f0cdb5495e1f59144967fa1664-512x512.jpg"; // Custom avatar URL for Bot in Discord
   // --------------------custom data------------------------------
 
   // --------------------required part------------------------------
   // Using function
   await sendToDiscordWebhookForEachSpec(
-    webhookURL,     // required variable
-    customMessage,  // set to undefined if you don't use custom message, but use custom avatar, custom username functionality
+    webhookURL, // required variable
+    customMessage, // set to undefined if you don't use custom message, but use custom avatar, custom username functionality
     customUsername, // set to undefined if you don't use custom username, but use custom avatar functionality
-    customAvatar,   // set to undefined if you don't use custom message
+    customAvatar // set to undefined if you don't use custom message
   );
   // --------------------required part------------------------------
 });
